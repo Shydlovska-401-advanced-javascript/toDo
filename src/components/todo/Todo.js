@@ -47,24 +47,32 @@ function ToDo() {
       setList(updatedList);
     }, []);
   
-    return (
-      <Container>
-        <Row>
-          <Col>
-          <header>
-          <Navbar bg="primary" variant="dark">
-          <Nav className="mr-auto">
-          <Navbar.Brand >Home</Navbar.Brand>
-          </Nav>
-          </Navbar> 
-            <Navbar expand="lg" variant="dark" bg="dark">
-         <Container>
+  return (
+
+    <>
+    <header>
+    <Navbar bg="primary" variant="dark">
+      <Nav className="mr-auto">
+        <Nav.Link >Home</Nav.Link>
+      </Nav>
+    </Navbar>
+    <br />
+
+        </header>
+        <Container>
+     <Row>
+  <Col >
+    <header>
+       <Navbar expand="lg" variant="dark" bg="dark">
+        <Nav className="mr-auto">
          <Navbar.Brand >ToDo List Manager ({list.length})</Navbar.Brand>
-         </Container>
-        </Navbar>
-          </header>
-          </Col>
+        </Nav>
+      </Navbar>
+        </header>
+      <br />
+      </Col>
           </Row>
+
           <Row>
             <Col md={4}>
             <div>
@@ -81,7 +89,8 @@ function ToDo() {
            </Col>
   
         </Row>
-      </Container>
+        </Container>
+     </>
     );
   }
   
