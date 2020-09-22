@@ -53,7 +53,9 @@ function ToDo() {
           <Col>
           <header>
           <Navbar bg="primary" variant="dark">
+          <Nav className="mr-auto">
           <Navbar.Brand >Home</Navbar.Brand>
+          </Nav>
           </Navbar> 
             <Navbar expand="lg" variant="dark" bg="dark">
          <Container>
@@ -64,19 +66,19 @@ function ToDo() {
           </Col>
           </Row>
           <Row>
-            <Col>
-          <section className="todo">
+            <Col md={4}>
             <div>
               <TodoForm handleSubmit={addItem} />
             </div>
-            <div>
+            </Col>
+            <Col md={8}>
+             <div>
               <TodoList
                 list={list}
                 handleComplete={toggleComplete}
                 />
-            </div>
-          </section>
-                </Col>
+             </div>
+           </Col>
   
         </Row>
       </Container>
