@@ -8,10 +8,8 @@ function TodoList(props) {
       <ListGroup>
         {props.list.map(item => (
           <ListGroup.Item action variant={item.complete? "danger":"success" }
-            // className={`complete-${item.complete.toString()}`}
             key={item._id}
-          >
-              {/* <ListGroup.Item onClick={() => props.handleComplete(item._id)}  action variant="danger"></ListGroup.Item> */}
+          >   
             <span onClick={() => props.handleComplete(item._id)}>
               {item.text}
             </span>

@@ -9,40 +9,16 @@ function TodoForm(props){
     const [item, setItem] = useState({})
 
     const handleInputChange = e => {
-        setItem({[e.target.name]: e.target.value });
+        setItem({...item, [e.target.name]: e.target.value });
           };
 
     const  handleSubmit = (e) => {
                 e.preventDefault();
                 e.target.reset();
                 props.handleSubmit(item);
-                setItem({item});
+                setItem({});
               };
     return (
-        
-      //   <Card className= 'Card'>
-      //   <form onSubmit={handleSubmit}>
-      //      <label>
-      //       <span>To Do Item</span>
-      //       <input
-      //         name="text"
-      //         placeholder="Add To Do List Item"
-      //         onChange={handleInputChange }
-      //       />
-      //     </label>
-      //     <label>
-      //       <span>Difficulty Rating</span>
-      //       <input defaultValue="1" type="range" min="1" max="5" name="difficulty" onChange={handleInputChange } />
-      //     </label>
-      //     <label>
-      //       <span>Assigned To</span>
-      //       <input type="text" name="assignee" placeholder="Assigned To" onChange={handleInputChange } />
-      //     </label> 
-      //       <Button type="submit"  size="sm">
-      //     Add Item
-      //    </Button> 
-      //    </form> 
-      // </Card>
 
       <Card>
          <Card.Body>
@@ -50,21 +26,18 @@ function TodoForm(props){
        <Form  onSubmit={handleSubmit}>
      <Form.Group controlId="formBasicEmail">
         <Form.Label>To Do Item</Form.Label>
-        <Form.Control type="text" placeholder="Add To Do List Item" onChange={handleInputChange }/>
+        <Form.Control name="text" placeholder="Add To Do List Item" onChange={handleInputChange }/>
         <Form.Text className="text-muted">
         </Form.Text>
        </Form.Group>
-       </Form> 
-
-       <Form  onSubmit={handleSubmit}>
-        <Form.Group controlId="formBasicEmail" onSubmit={handleSubmit}>
+     
+        <Form.Group controlId="formBasicEmail" >
             <Form.Label>Assigned To</Form.Label>
-            <Form.Control type="text" placeholder="Assigned To" onChange={handleInputChange }/>
+            <Form.Control name="assigned to" placeholder="Assigned To" onChange={handleInputChange }/>
             <Form.Text className="text-muted">
             </Form.Text>
         </Form.Group>
-        </Form>
-        <Form>
+      
         <Form.Group controlId="formBasicRange">
             <Form.Label>Difficulty Rating</Form.Label>
             <Form.Control type="range" onChange={handleInputChange } />
@@ -79,33 +52,5 @@ function TodoForm(props){
     )
 }
 
-// render(){
-//     return(
-//       <>
-//       <h3>Add Item</h3>
-//        <form onSubmit={handleSubmit}>
-//            <label>
-//             <span>To Do Item</span>
-//              <input
-//               name="text"
-//               placeholder="Add To Do List Item"
-//               onChange={handleInputChange }
-//             />
-//           </label>
-//           <label>
-//             <span>Difficulty Rating</span>
-//             <input defaultValue="1" type="range" min="1" max="5" name="difficulty" onChange={handleInputChange } />
-//           </label>
-//           <label>
-//             <span>Assigned To</span>
-//             <input type="text" name="assignee" placeholder="Assigned To" onChange={handleInputChange } />
-//           </label> 
-//             <Button type="submit"  size="sm">
-//           Add Item
-//          </Button> 
-//          </form> 
-//       </>
-//     )
-// }
 
 export default TodoForm;
