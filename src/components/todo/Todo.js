@@ -35,16 +35,22 @@ function ToDo() {
   
     };
   
-    useEffect(() => {
-      let updatedList = [
-        { _id: 1, complete: false, text: 'Clean the Kitchen', difficulty: 3, assignee: 'Person A' },
-        { _id: 2, complete: false, text: 'Do the Laundry', difficulty: 2, assignee: 'Person A' },
-        { _id: 3, complete: false, text: 'Walk the Dog', difficulty: 4, assignee: 'Person B' },
-        { _id: 4, complete: true, text: 'Do Homework', difficulty: 3, assignee: 'Person C' },
-        { _id: 5, complete: false, text: 'Take a Nap', difficulty: 1, assignee: 'Person B' },
-      ];
+
+    useEffect( async() => {
+
+      const response = await axios.get('hhtp://localhost:3000/api/v1/todo')
+      setList(response.data.results);
+
+    // useEffect(() => {
+    //   let updatedList = [
+    //     { _id: 1, complete: false, text: 'Clean the Kitchen', difficulty: 3, assignee: 'Person A' },
+    //     { _id: 2, complete: false, text: 'Do the Laundry', difficulty: 2, assignee: 'Person A' },
+    //     { _id: 3, complete: false, text: 'Walk the Dog', difficulty: 4, assignee: 'Person B' },
+    //     { _id: 4, complete: true, text: 'Do Homework', difficulty: 3, assignee: 'Person C' },
+    //     { _id: 5, complete: false, text: 'Take a Nap', difficulty: 1, assignee: 'Person B' },
+    //   ];
   
-      setList(updatedList);
+    //   setList(updatedList);
     }, []);
   
   return (
