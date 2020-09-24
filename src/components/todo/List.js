@@ -1,6 +1,7 @@
  
 import React from 'react';
 import ListGroup from 'react-bootstrap/ListGroup';
+import Button from 'react-bootstrap/Button';
 import './Todo.scss';
 
 function TodoList(props) {
@@ -13,7 +14,8 @@ function TodoList(props) {
             <span onClick={() => props.handleComplete(item._id)}>
               {item.text}
             </span>
-            <button type="button" class="btn btn-link" onClick={() => props.handleDelete(item._id)}>X</button>
+            <Button variant="link" onClick={() => props.handleDelete(item._id)}>x</Button>
+            {/* <button type="button" className="btn btn-link" onClick={() => props.handleDelete(item._id)}>X</button> */}
           </ListGroup.Item>
         ))}
       </ListGroup>

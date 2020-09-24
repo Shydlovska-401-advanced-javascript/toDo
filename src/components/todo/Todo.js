@@ -1,10 +1,10 @@
 
 import React, { useState, useEffect  } from 'react';
+// import React from 'react';
 import axios from 'axios';
 import TodoForm from './Form.js';
 import TodoList from './List.js';
-// import Swapi from './swapi';
-// import Ajax from 'Ajax.js';
+// import useAjax from './Ajax.js';
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -19,7 +19,8 @@ import './Todo.scss';
 function ToDo() {
 
     const [list, setList] = useState([])
-    // const [isLoading, setLoading] = useState(false);
+    // const { list } = useAjax('http://localhost:3001/api/v1/todo', 'GET', {});
+    
   
   async function addItem(item) {
       item.complete = false;
@@ -28,6 +29,7 @@ function ToDo() {
       const results = response.data;
       console.log(results, 'results from post')
       setList([...list, results]);
+      
     }
   
     async function toggleComplete(id){
@@ -47,7 +49,7 @@ function ToDo() {
       let item = list.filter(i => i._id === id)[0] || {};
       if (item._id) {
         item.complete = !item.complete;
-        await axios.put('http://localhost:3001/api/v1/todo/' + id);
+        await axios.delete('http://localhost:3001/api/v1/todo/' + id);
         let updatedList = list.filter(listItem => listItem._id !== item._id );
         setList(updatedList);
       }
@@ -56,12 +58,10 @@ function ToDo() {
 
     useEffect( () => {
       async function fetchData(){
-        // setLoading(true);
         const response = await axios.get('http://localhost:3001/api/v1/todo')
         const results = response.data.data;
-        console.log('here I am', response.data.data )
+        // console.log('here I am', response.data.data )
         setList(results);
-        // setLoading(true);
         
       }
       fetchData();

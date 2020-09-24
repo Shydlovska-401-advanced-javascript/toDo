@@ -1,23 +1,21 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
+import React from 'react';
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 
+import useForm from './formHook.js'
+
 function TodoForm(props){
 
 
-    const [item, setItem] = useState({})
+  const [handleInputChange, handleSubmit] = useForm(submitForm);
 
-    const handleInputChange = e => {
-        setItem({...item, [e.target.name]: e.target.value });
-          };
+  function submitForm(task){
+    console.log(task, 'task')
+    props.handleSubmit(task)
+  }
 
-    const  handleSubmit = (e) => {
-                e.preventDefault();
-                e.target.reset();
-                props.handleSubmit(item);
-                setItem({});
-              };
     return (
 
       <Card>
@@ -40,7 +38,7 @@ function TodoForm(props){
       
         <Form.Group controlId="formBasicRange">
             <Form.Label>Difficulty Rating</Form.Label>
-            <Form.Control type="range" onChange={handleInputChange } />
+            <Form.Control type="range" name="difficulty" onChange={handleInputChange } />
         </Form.Group>
         <Button variant="primary" type="submit">
         Add Item
@@ -54,3 +52,5 @@ function TodoForm(props){
 
 
 export default TodoForm;
+
+
