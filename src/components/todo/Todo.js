@@ -4,7 +4,7 @@ import React, { useState, useEffect  } from 'react';
 import axios from 'axios';
 import TodoForm from './Form.js';
 import TodoList from './List.js';
-// import useAjax from './Ajax.js';
+import useAjax from './Ajax.js';
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -18,8 +18,7 @@ import './Todo.scss';
 
 function ToDo() {
 
-    const [list, setList] = useState([])
-    // const { list } = useAjax('http://localhost:3001/api/v1/todo', 'GET', {});
+    const { list, setList } = useAjax('http://localhost:3001/api/v1/todo', 'GET', {});
     
   
   async function addItem(item) {
@@ -56,17 +55,16 @@ function ToDo() {
     }
   
 
-    useEffect( () => {
-      async function fetchData(){
-        const response = await axios.get('http://localhost:3001/api/v1/todo')
-        const results = response.data.data;
-        // console.log('here I am', response.data.data )
-        setList(results);
+    // useEffect( () => {
+    //   async function fetchData(){
+    //     const response = await axios.get('http://localhost:3001/api/v1/todo')
+    //     const results = response.data.data;
+    //     setList(results);
         
-      }
-      fetchData();
+    //   }
+    //   fetchData();
 
-    }, []);
+    // }, []);
   
   return (
 
@@ -87,7 +85,6 @@ function ToDo() {
        <Navbar expand="lg" variant="dark" bg="dark">
         <Nav className="mr-auto">
          <Navbar.Brand >ToDo List Manager ({list.filter(item => !item.complete).length})</Navbar.Brand>
-         {/* (isLoading && <p>Loading ...</p>) */}
         </Nav>
       </Navbar>
         </header>

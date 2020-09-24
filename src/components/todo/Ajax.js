@@ -20,10 +20,11 @@ const useAjax = (url, method, body) => {
 
   }, [url]);
     
-  // }
+       
 
   return {
     list,
+    setList
    
   }
 }
