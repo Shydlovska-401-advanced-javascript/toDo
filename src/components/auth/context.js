@@ -17,6 +17,7 @@ class LoginProvider extends React.Component {
       can: this.can,
       user: {},
     };
+    console.log('hdgvaisgfey')
   }
 
   can = (capability) => {

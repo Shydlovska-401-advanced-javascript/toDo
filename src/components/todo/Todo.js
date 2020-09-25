@@ -1,12 +1,10 @@
 
 import React, { useState, useEffect, useCallback  } from 'react';
-// import React from 'react';
-import axios from 'axios';
 import TodoForm from './Form.js';
 import TodoList from './List.js';
 import useAjax from './Ajax.js';
-// import Auth from '../auth/auth.js'
-// import Login from '../auth/login.js'
+import Auth from '../auth/auth.js'
+import Login from '../auth/login.js'
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -18,7 +16,7 @@ import './Todo.scss';
 
 
 // 'http://localhost:3001/api/v1/todo';
-const API = 'http://localhost:3001';
+const API = process.env.REACT_APP_API;
 
 function ToDo() {
 
@@ -70,8 +68,8 @@ function ToDo() {
 
 
     useEffect( () => {
-      if(response.data){
-        response.data && setList(response.data)
+      if(response.results){
+        response.results && setList(response.results)
       }else{
         getList();
       }
@@ -93,11 +91,12 @@ function ToDo() {
         <Nav.Link >Home</Nav.Link>
       </Nav>
     </Navbar>
+    <Login/>
     <br />
 
         </header>
-        {/* <Login/> */}
-          {/* <Auth> */}
+        
+          <Auth >
         <Container>
      <Row>
   <Col >
@@ -114,13 +113,14 @@ function ToDo() {
 
           <Row>
             <Col md={4}>
-              {/* <Auth> */}
+              <Auth capability="create">
             <div>
               <TodoForm handleSubmit={addItem} />
             </div>
-            {/* </Auth> */}
+            </Auth>
             </Col>
             <Col md={8}>
+            <Auth capability="read">
              <div>
               <TodoList
                 list={list}
@@ -128,11 +128,12 @@ function ToDo() {
                 handleDelete={deleteItem}
                 />
              </div>
+             </Auth>
            </Col>
   
         </Row>
         </Container>
-        {/* </Auth> */}
+        </Auth>
         
      </>
     );

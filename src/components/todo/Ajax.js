@@ -19,6 +19,7 @@ const useAjax = () => {
     }
     ajax();
   }, [options]);
+  console.log(response, "response");
   return { request, response, error, isLoading };
 };
 export default useAjax;
