@@ -1,10 +1,12 @@
 
-import React, { useState, useEffect  } from 'react';
+import React, { useState, useEffect, useCallback  } from 'react';
 // import React from 'react';
 import axios from 'axios';
 import TodoForm from './Form.js';
 import TodoList from './List.js';
 import useAjax from './Ajax.js';
+// import Auth from '../auth/auth.js'
+// import Login from '../auth/login.js'
 
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
@@ -15,56 +17,72 @@ import Nav from 'react-bootstrap/Nav'
 import './Todo.scss';
 
 
+// 'http://localhost:3001/api/v1/todo';
+const API = 'http://localhost:3001';
 
 function ToDo() {
 
-    const { list, setList } = useAjax('http://localhost:3001/api/v1/todo', 'GET', {});
+
+    const { request, response } = useAjax();
+    const [list, setList ] = useState([]);
     
-  
-  async function addItem(item) {
-      item.complete = false;
-      console.log(item)
-      const response = await axios.post('http://localhost:3001/api/v1/todo', item);
-      const results = response.data;
-      console.log(results, 'results from post')
-      setList([...list, results]);
-      
+
+
+
+    const addItem = async(item) =>{
+      const options ={
+        method: 'post',
+        url: `${API}/api/v1/todo`,
+        data: item,
+
+      };
+      request(options);
     }
   
-    async function toggleComplete(id){
-  
-      let item = list.filter(i => i._id === id)[0] || {};
+  const toggleComplete = async (id) =>{
+    let item = list.filter(i => i._id === id)[0] || {};
       if (item._id) {
-        item.complete = !item.complete;
-        await axios.put('http://localhost:3001/api/v1/todo/' + item._id, item);
-        let updatedList = list.map(listItem => listItem._id === item._id ? item : listItem);
-        setList(updatedList);
+        const options ={
+          method: 'put',
+          url: `${API}/api/v1/todo/${id}`,
+          data:{complete :!item.complete},
+        };
+        request(options);
       }
-  
-    };
+  }
 
-    async function deleteItem(id){
-      
-      let item = list.filter(i => i._id === id)[0] || {};
-      if (item._id) {
-        item.complete = !item.complete;
-        await axios.delete('http://localhost:3001/api/v1/todo/' + id);
-        let updatedList = list.filter(listItem => listItem._id !== item._id );
-        setList(updatedList);
-      }
+    const deleteItem = async (id) =>{
+      const options ={
+        method: 'delete',
+        url: `${API}/api/v1/todo/${id}`,
+
+      };
+      request(options);
     }
-  
 
-    // useEffect( () => {
-    //   async function fetchData(){
-    //     const response = await axios.get('http://localhost:3001/api/v1/todo')
-    //     const results = response.data.data;
-    //     setList(results);
-        
-    //   }
-    //   fetchData();
+    const getList = useCallback( async () => {
+      const options ={
+        method: 'get',
+        url: `${API}/api/v1/todo`,
+      }
+      request(options);
+    }, [request])
 
-    // }, []);
+
+    useEffect( () => {
+      if(response.data){
+        response.data && setList(response.data)
+      }else{
+        getList();
+      }
+    }, [response, getList, setList]);
+
+
+    useEffect(() => {
+      let incomplete = list.filter(item => !item.complete).length;
+      document.title = `To DO List: ${incomplete}`;
+    })
+
   
   return (
 
@@ -78,6 +96,8 @@ function ToDo() {
     <br />
 
         </header>
+        {/* <Login/> */}
+          {/* <Auth> */}
         <Container>
      <Row>
   <Col >
@@ -94,9 +114,11 @@ function ToDo() {
 
           <Row>
             <Col md={4}>
+              {/* <Auth> */}
             <div>
               <TodoForm handleSubmit={addItem} />
             </div>
+            {/* </Auth> */}
             </Col>
             <Col md={8}>
              <div>
@@ -110,6 +132,8 @@ function ToDo() {
   
         </Row>
         </Container>
+        {/* </Auth> */}
+        
      </>
     );
   }
