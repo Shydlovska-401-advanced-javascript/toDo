@@ -1,20 +1,26 @@
  
-import React from 'react';
+import React, { useContext } from 'react';
 import ListGroup from 'react-bootstrap/ListGroup';
+import Button from 'react-bootstrap/Button';
 import './Todo.scss';
 
+import { LoginContext } from '../auth/context.js'
+
 function TodoList(props) {
+
+  const authContext = useContext(LoginContext);
+
     return (
       <ListGroup>
         {props.list.map(item => (
-          <ListGroup.Item action variant="success"
-            className={`complete-${item.complete.toString()}`}
+          <ListGroup.Item action variant={item.complete? "danger":"success" }
             key={item._id}
-          >
-              {/* <ListGroup.Item onClick={() => props.handleComplete(item._id)}  action variant="danger"></ListGroup.Item> */}
-            <span onClick={() => props.handleComplete(item._id)}>
+          >   
+            <span onClick={() => authContext.can('update') && props.handleComplete(item._id)}>
               {item.text}
             </span>
+            <Button variant="link" onClick={() => props.handleDelete(item._id)}>x</Button>
+            {/* <button type="button" className="btn btn-link" onClick={() => props.handleDelete(item._id)}>X</button> */}
           </ListGroup.Item>
         ))}
       </ListGroup>

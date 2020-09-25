@@ -1,50 +1,56 @@
-import React, { useState } from 'react';
+// import React, { useState } from 'react';
+import React from 'react';
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/Button'
-// import Form from 'react-bootstrap/Forms';
+import Form from 'react-bootstrap/Form'
+
+import useForm from './formHook.js'
 
 function TodoForm(props){
 
 
-    const [item, setItem] = useState({})
+  const [handleInputChange, handleSubmit] = useForm(submitForm);
 
-    const handleInputChange = e => {
-        setItem({[e.target.name]: e.target.value });
-          };
+  function submitForm(task){
+    console.log(task, 'task')
+    props.handleSubmit(task)
+  }
 
-    const  handleSubmit = (e) => {
-                e.preventDefault();
-                e.target.reset();
-                props.handleSubmit(item);
-                setItem({item});
-              };
     return (
-        
-        <Card className= 'Card'>
-        <form onSubmit={handleSubmit}>
-           <label>
-            <span>To Do Item</span>
-            <input
-              name="text"
-              placeholder="Add To Do List Item"
-              onChange={handleInputChange }
-            />
-          </label>
-          <label>
-            <span>Difficulty Rating</span>
-            <input defaultValue="1" type="range" min="1" max="5" name="difficulty" onChange={handleInputChange } />
-          </label>
-          <label>
-            <span>Assigned To</span>
-            <input type="text" name="assignee" placeholder="Assigned To" onChange={handleInputChange } />
-          </label> 
-            <Button type="submit"  size="sm">
-          Add Item
-         </Button> 
-         </form> 
+
+      <Card>
+         <Card.Body>
+             <h3>Add Item</h3>
+       <Form  onSubmit={handleSubmit}>
+     <Form.Group controlId="formBasicEmail">
+        <Form.Label>To Do Item</Form.Label>
+        <Form.Control name="text" placeholder="Add To Do List Item" onChange={handleInputChange }/>
+        <Form.Text className="text-muted">
+        </Form.Text>
+       </Form.Group>
+     
+        <Form.Group controlId="formBasicEmail" >
+            <Form.Label>Assigned To</Form.Label>
+            <Form.Control name="assigned to" placeholder="Assigned To" onChange={handleInputChange }/>
+            <Form.Text className="text-muted">
+            </Form.Text>
+        </Form.Group>
+      
+        <Form.Group controlId="formBasicRange">
+            <Form.Label>Difficulty Rating</Form.Label>
+            <Form.Control type="range" name="difficulty" onChange={handleInputChange } />
+        </Form.Group>
+        <Button variant="primary" type="submit">
+        Add Item
+        </Button>
+        </Form>
+        </Card.Body>
       </Card>
 
     )
 }
 
+
 export default TodoForm;
+
+

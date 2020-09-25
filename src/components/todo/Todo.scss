@@ -1,72 +1,56 @@
-// @function gray($key: "100") {
-//     @return map-get($grays, $key);
-//   }
 @import "~bootstrap/scss/bootstrap";
-// @import "~bootstrap/scss/functions";
-// @import "~bootstrap/scss/variables";
-// @import "~bootstrap/scss/mixins";
 
 
-// @function gray($key: "100") {
-//     @return map-get($grays, $key);
-//   }
+// body, html {
+//     height: 100%;
+//     margin: 0;
+//     padding:0;
+//     width: 100%;
+// }
+// .todo-details {
+//     display:flex;
+//     flex-direction:column;
 
-// .header {
-//     color: gray("100");
-//     background-color: theme-color("");
-    
-//   }
-
-body, html {
-    height: 100%;
-    margin: 0;
-    padding:0;
-    width: 100%;
-}
-.todo-details {
-    display:flex;
-    flex-direction:column;
-
-    header {
-        display:flex;
-        flex-direction:row;
-        justify-content:space-between;
-        padding:.5em 1em;
+//     header {
+//         display:flex;
+//         flex-direction:row;
+//         justify-content:space-between;
+//         padding:.5em 1em;
         
-    }
+//     }
 
-    .item {
-        flex:1;
-        padding: 1em;
-    }
+//     .item {
+//         flex:1;
+//         padding: 1em;
+//     }
 
-}
+// }
 
-.todo {
+// .todo {
 
-    display:flex;
-    flex-direction:row;
-    justify-content: flex-start;
-    margin: 3em;
+//     display:flex;
+//     flex-direction:row;
+//     justify-content: flex-start;
+//     margin: 3em;
     
 
-    form {
+//     form {
 
-        display:flex;
-        flex-direction:column;
-        margin-right: 3em;
+//         display:flex;
+//         flex-direction:column;
+//         margin-right: 3em;
 
-        label {
-            display: flex;
-            flex-direction:column;
-            margin-bottom: 1em;
-        }
-    }
-}
+//         label {
+//             display: flex;
+//             flex-direction:column;
+//             margin-bottom: 1em;
+//         }
+//     }
+// }
 
-.Card{
-    margin-right: 5em;
-}
+// .Card{
+//     margin-right: 5em;
+// }
 
 //     ul {
 //         list-style-type:none;
